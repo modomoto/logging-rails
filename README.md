@@ -1,8 +1,14 @@
 logging-rails
 =============
 
-A Railtie for for integrating the [Logging](https://github.com/TwP/logging)
-framework into your Rails 3 application.
+A specialized Railtie for integrating the [Logging](https://github.com/TwP/logging)
+framework into a Rails application. Per default export ist json and some Application specific information are added:
+ * mdc.application : Application Name
+ * mdc.session_id : Session Id
+ * mdc.user_id : current_user.id (if definded)
+ * mdc.params : all params
+Also a Loglevel "event" has been added with the method 'log_event(action, id, msg, id_type = "", target_name = "")'
+
 
 Features
 --------

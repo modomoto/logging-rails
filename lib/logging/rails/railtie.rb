@@ -30,7 +30,11 @@ module Logging::Rails
     end
 
     initializer 'logging.action_controller.logger', :before => 'action_controller.logger' do
-      ActiveSupport.on_load(:action_controller) { self.__send__(:include, ::Logging::Rails::Mixin) }
+      ActiveSupport.on_load(:action_controller) { 
+        self.__send__(:include, ::Logging::Rails::Mixin) 
+        self.__send__(:before_action, :add_default_controller_log_params)
+        self.__send__(:after_action, :remove_default_controller_log_params)
+      }
     end
 
     initializer 'logging.action_mailer.logger', :before => 'action_mailer.logger' do

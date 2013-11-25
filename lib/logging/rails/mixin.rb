@@ -36,6 +36,27 @@ module Logging::Rails
     def logger
       @logger ||= ::Logging::Logger[self]
     end
+
+    def log_event(action, id, msg, id_type = "", target_name = "")
+      unless [:create, :read, :update, :delete].include? action
+        raise "Action needs to be of type :create, :read, :update, :delete"
+      end
+      logger.event(action: action, id: id, msg: msg, id_type: id_type, target_name: target_name)
+    end
+
+    def add_default_controller_log_params
+      Logging.mdc['session_id'] = session.id
+      Logging.mdc['user_id'] = current_user.id if defined? current_user
+      Logging.mdc['params'] = params.to_json
+    end
+
+    def remove_default_controller_log_params
+      Logging.mdc['session_id'] = ""
+      Logging.mdc['user_id'] = ""
+      Logging.mdc['params'] = ""
+    end
+
+
   end  # Mixin
 
 end  # Logging::Rails
