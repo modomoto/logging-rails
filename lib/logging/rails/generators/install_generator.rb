@@ -20,8 +20,8 @@ module Logging::Rails
         insert_into_file 'config/environments/development.rb', comment % 'false', :before => %r/^end\s*$/
         insert_into_file 'config/environments/production.rb', comment % 'false', :before => %r/^end\s*$/
 
-        insert_into_file 'config/environments/development.rb', "\n config.log_level = :info \n", :before => %r/^end\s*$/
-        insert_into_file 'config/environments/production.rb',  "\n config.log_level = :event \n", :before => %r/^end\s*$/
+        insert_into_file 'config/environments/development.rb', "\n config.log_level = :info", :before => %r/^end\s*$/
+        insert_into_file 'config/environments/production.rb',  "\n config.log_level = :event", :before => %r/^end\s*$/
       end
     end
   end
