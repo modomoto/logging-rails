@@ -21,7 +21,7 @@ Logging::Rails.configure do |config|
   ) if config.log_to.include? 'file'
 
 
-  Logging.mdc[' '] = Rails.application.class.parent_name
+  Logging.mdc['application'] = Rails.application.class.parent_name
 
   Logging.init :debug, :info, :event, :warn, :error, :fatal
 
